@@ -80,3 +80,5 @@ Penjelasan:
 	- `awk 'BEGIN{FS="\t"}` artinya data yang diinput (dalam hal ini merupakan output dari perintah sebelumnya) menggunakan "tab" sebagai pembatas kolom.
 	- `head -10` menampilkan 10 row teratas
 
+#### Hasil
+![output_soal1](https://github.com/neutralix/SoalShiftSISOP20_modul1_F06/blob/master/output_soal1.png)
