@@ -2,7 +2,6 @@
 
 kenangancount=$(ls -l kenangan | wc -l)
 duplicatecount=$(ls -l duplicate | wc -l)
-currentcount=$(ls -l | wc -l)
 
 for ((i=1 ; $i<=28 ; i++))
 do
