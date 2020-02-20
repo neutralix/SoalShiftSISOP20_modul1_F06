@@ -82,3 +82,55 @@ Penjelasan:
 
 #### Hasil
 ![output_soal1](https://github.com/neutralix/SoalShiftSISOP20_modul1_F06/blob/master/output_soal1.png)
+
+
+## Soal 2
+Pada suatu siang, laptop Randolf dan Afairuzr dibajak oleh seseorang dan kehilangan data-data penting.
+Untuk mencegah kejadian yang sama terulang kembali mereka
+meminta bantuan kepada Whits karena dia adalah seorang yang punya banyak ide.
+Whits memikirkan sebuah ide namun dia meminta bantuan kalian kembali agar ide
+tersebut cepat diselesaikan.
+
+### a. Membuat sebuah script bash yang dapat menghasilkan password secara acak sebanyak 28 karakter yang terdapat huruf besar, huruf kecil, dan angka / b. Password acak tersebut disimpan pada file berekstensi .txt dengan nama berdasarkan argumen yang diinputkan dan HANYA berupa alphabet.
+
+#### Penyelesaian
+Menggunakan command untuk melakukan random generate character dan disimpan ke sebuah file dengan nama sesuai argumen yang diterima.
+~~~
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > "$1".txt
+~~~
+Penjelasan:
+- `cat` digunakan untuk menampilkan isi file, dalam kasus ini isi file berasal dari command /dev/urandom.
+- `/dev/urandom` digunakan untuk memanggil perintah yang dapat me-random karakter secara pseudorandom.
+- `tr -dc 'a-zA-Z0-9'` mengatur agar karakter yang di-random merupakan alfabet dan angka.
+- `fold -w 28` jumlah karakter yang di-random sepanjang 28 karakter.
+- `head -n 1` membuat satu baris string random.
+- `> "$1".txt` melakukan redirection (menyimpan output ke file) dengan nama sesuai argumen.
+
+### b. 
+
+#### Penyelesaian
+Menggunakan command untuk melakukan random generate character dan disimpan ke sebuah file dengan nama sesuai argumen yang diterima.
+~~~
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > "$1".txt
+~~~
+Penjelasan:
+- `cat` digunakan untuk menampilkan isi file, dalam kasus ini isi file berasal dari command /dev/urandom.
+- `/dev/urandom` digunakan untuk memanggil perintah yang dapat me-random karakter secara pseudorandom.
+- `tr -dc 'a-zA-Z0-9'` mengatur agar karakter yang di-random merupakan alfabet dan angka.
+- `fold -w 28` jumlah karakter yang di-random sepanjang 28 karakter.
+- `head -n 1` membuat satu baris string random.
+- `> "$1".txt` melakukan redirection (menyimpan output ke file) dengan nama sesuai argumen.
+
+
+## Soal 3
+Pa
+
+### a. Membuat sebuah script bash yang dapat menghasilkan password secara acak sebanyak 28 karakter yang terdapat huruf besar, huruf kecil, dan angka.
+
+#### Penyelesaian
+Menggunakan command untuk melakukan random generate character dan disimpan ke sebuah file dengan nama sesuai argumen yang diterima.
+~~~
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > "$1".txt
+~~~
+Penjelasan:
+- Da
