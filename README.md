@@ -4,6 +4,14 @@
 	- [a](#a-tentukan-wilayah-bagian-region-mana-yang-memiliki-keuntungan-profit-paling-sedikit)
 	- [b](#b-tampilkan-2-negara-bagian-state-yang-memiliki-keuntungan-profit-paling-sedikit-berdasarkan-hasil-poin-a)
 	- [c](#c-tampilkan-10-produk-product-name-yang-memiliki-keuntungan-profit-paling-sedikit-berdasarkan-2-negara-bagian-state-hasil-poin-b)
+- [Soal 2](#Soal-2)
+	- [a/b](#a-membuat-sebuah-script-bash-yang-dapat-menghasilkan-password-secara-acak-sebanyak-28-karakter-yang-terdapat-huruf-besar-huruf-kecil-dan-angka--b-password-acak-tersebut-disimpan-pada-file-berekstensi-txt-dengan-nama-berdasarkan-argumen-yang-diinputkan-dan-hanya-berupa-alphabet)
+	- [c](#c-kemudian-supaya-file-txt-tersebut-tidak-mudah-diketahui-maka-nama-filenya-akan-di-enkripsi-dengan-menggunakan-konversi-huruf-string-manipulation-yang-disesuaikan-dengan-jam0-23-dibuatnya-file-tersebut)
+	- [d](#d-membuat-dekripsinya-supaya-nama-file-bisa-kembali)
+- [Soal 3](#Soal-3)
+	- [a](#a-maka-dari-itu-kalian-mencoba-membuat-script-untuk-mendownload-28-gambar-dari--httpsloremflickrcom320240cat--menggunakan-command-wget-dan-menyimpan-file-dengan-nama-pdkt_kusuma_no-contoh-pdkt_kusuma_1-pdkt_kusuma_2-pdkt_kusuma_3-serta-jangan-lupa-untuk-menyimpan-log-messages-wget-kedalam-sebuah-file-wgetlog-)
+	- [b](#b-karena-kalian-gak-suka-ribet-kalian-membuat-penjadwalan-untukmenjalankan-script-download-gambar-tersebut-namun-script-download-tersebut-hanya-berjalan-setiap-8-jam-dimulai-dari-jam-605-setiap-hari-kecuali-hari-sabtu)
+	- [c](#c-maka-dari-itu-buatlah-sebuah-script-untuk-mengidentifikasi-gambar-yang-identik-dari-keseluruhan-gambar-yang-terdownload-tadi-bila-terindikasi-sebagai-gambar-yang-identik-maka-sisakan-1-gambar-dan-pindahkan-sisa-file-identik-tersebut-ke-dalam-folder-duplicate-dengan-format-filename-duplicate_nomor-contoh--duplicate_200-duplicate_201-setelah-itu-lakukan-pemindahan-semua-gambar-yang-tersisa-kedalam-folder-kenangan-dengan-format-filename-kenangan_nomor-contoh-kenangan_252-kenangan_253-setelah-tidak-ada-gambar-di-current-directory--maka-lakukan-backup-seluruh-log-menjadi-ekstensi-logbak)
 		
 ## Soal 1
 Whits adalah seorang mahasiswa teknik informatika. Dia mendapatkan tugas praktikum
@@ -82,7 +90,6 @@ Penjelasan:
 
 #### Hasil
 ![output_soal1](https://github.com/neutralix/SoalShiftSISOP20_modul1_F06/blob/master/output_soal1.png)
-
 
 ## Soal 2
 Pada suatu siang, laptop Randolf dan Afairuzr dibajak oleh seseorang dan kehilangan data-data penting.
