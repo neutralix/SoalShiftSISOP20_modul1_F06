@@ -106,7 +106,7 @@ Penjelasan:
 - `head -n 1` membuat satu baris string random.
 - `> "$1".txt` melakukan redirection (menyimpan output ke file) dengan nama sesuai argumen.
 
-### c. Kemudian supaya file .txt tersebut tidak mudah diketahui maka nama filenya akan di enkripsi dengan menggunakan konversi huruf (string manipulation) yang disesuaikan dengan jam(0-23) dibuatnya file tersebut dengan program terpisah dengan (misal: password.txt dibuat pada jam 01.28 maka namanya berubah menjadi qbttxpse.txt dengan perintah ‘ bash soal2_enkripsi.sh password.txt’. Karena p adalah huruf ke 16 dan file dibuat pada jam 1 maka 16+1=17 dan huruf ke 17 adalah q dan begitu pula seterusnya. Apabila melebihi z , akan kembali ke a , contoh: huruf w dengan jam 5.28, maka akan menjadi huruf b.
+### c. Kemudian supaya file .txt tersebut tidak mudah diketahui maka nama filenya akan di enkripsi dengan menggunakan konversi huruf (string manipulation) yang disesuaikan dengan jam(0-23) dibuatnya file tersebut.
 
 #### Penyelesaian
 Memanipulasi nama file yang diakses sedemikian sehingga string asalnya berubah/bergeser beberapa alfabet tergantung dari jamnya. Pertama harus melakukan ekstrak nama file dan mendapatkan jam "last-modified" file tersebut yang digunakan untuk acuan enkripsi.
@@ -128,7 +128,7 @@ Penjelasan:
 - `newfile=$(echo "$newfile" | tr '[A-Za-z]' '[B-ZAb-za]')` melakukan enkripsi(penggeseran) alfabet sebanyak 1 ke kanan. Contohnya abc menjadi bcd. Proses ini diulang sebanyak variable hour. Hasil enkripsi disimpan ke variable newfile.
 - `mv "$1" "$newfile.txt"` me-rename file dengan nama yang telah dienkripsi.
 
-### d. jangan lupa untuk membuat dekripsinya supaya nama file bisa kembali.
+### d. Membuat dekripsinya supaya nama file bisa kembali.
 
 #### Penyelesaian
 Prinsip yang digunakan sama seperti saat melakukan enkripsi. Yang membedakan adalah kali ini string bergeser lawan arah dari saat enkripsi.
@@ -150,17 +150,74 @@ Penjelasan:
 - `newfile=$(echo "$newfile" | tr '[A-Za-z]' '[ZA-Yza-y]')` melakukan enkripsi(penggeseran) alfabet sebanyak 1 ke kiri. Contohnya abc menjadi zab. Proses ini diulang sebanyak variable hour. Hasil dekripsi disimpan ke variable newfile.
 - command selebihnya berfungsi sama seperti pada soal c.
 
-
-
 ## Soal 3
-Pa
+1 tahun telah berlalu sejak pencampakan hati Kusuma. Akankah sang pujaan hati
+kembali ke naungan Kusuma? Memang tiada maaf bagi Elen. Tapi apa daya hati yang
+sudah hancur, Kusuma masih terguncang akan sikap Elen. Melihat kesedihan Kusuma,
+kalian mencoba menghibur Kusuma dengan mengirimkan gambar kucing.
 
-### a. Membuat sebuah script bash yang dapat menghasilkan password secara acak sebanyak 28 karakter yang terdapat huruf besar, huruf kecil, dan angka.
+### a. Maka dari itu, kalian mencoba membuat script untuk mendownload 28 gambar dari " https://loremflickr.com/320/240/cat " menggunakan command wget dan menyimpan file dengan nama "pdkt_kusuma_NO" (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3) serta jangan lupa untuk menyimpan log messages wget kedalam sebuah file "wget.log" .
 
 #### Penyelesaian
-Menggunakan command untuk melakukan random generate character dan disimpan ke sebuah file dengan nama sesuai argumen yang diterima.
+Menggunakan command wget untuk melakukan download gambar dari url yang diberikan.
 ~~~
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > "$1".txt
+for ((i=1 ; $i<=28 ; i++))
+do
+	wget "https://loremflickr.com/320/240/cat" -a "wget.log" -O "pdkt_kusuma_$i"
+done
 ~~~
 Penjelasan:
-- Da
+- `wget` command untuk melakukan download
+- `-a "wget.log"` opsi tambahan wget untuk selalu melakukan append log download ke file wget.log
+- `-O "pdkt_kusuma_$i` opsi tambahan wget untuk menyimpan file yang didownload dengan nama sesuai format tersebut
+
+### b. Karena kalian gak suka ribet, kalian membuat penjadwalan untukmenjalankan script download gambar tersebut. Namun, script download tersebut hanya berjalan setiap 8 jam dimulai dari jam 6.05 setiap hari kecuali hari Sabtu
+
+#### Penyelesaian
+Melakukan task pada crontab dengan format jam tertentu
+~~~
+5 6-23/8 * * 0-5 Desktop/Modul1/SoalShift/Soal3/soal3.sh
+~~~
+Penjelasan:
+- `5 6-23/8 * * 0-5` setting cron tersebut berarti berjalan setiap 8 jam dimulai dari jam 6.05 bulan apapun selama setiap hari kecuali hari sabtu.
+- `Desktop/Modul1/SoalShift/Soal3/soal3.sh` lokasi script yang akan dijalankan
+
+### c. Maka dari itu buatlah sebuah script untuk mengidentifikasi gambar yang identik dari keseluruhan gambar yang terdownload tadi. Bila terindikasi sebagai gambar yang identik, maka sisakan 1 gambar dan pindahkan sisa file identik tersebut ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory , maka lakukan backup seluruh log menjadi ekstensi ".log.bak".
+
+#### Penyelesaian
+Menggunakan command wget untuk melakukan download gambar dari url yang diberikan.
+~~~
+kenangancount=$(ls -l kenangan | wc -l)
+duplicatecount=$(ls -l duplicate | wc -l)
+...
+...
+for ((i=1 ; $i<=28 ; i++))
+do
+	for ((j=$((i+1)) ; $j<=28 ; j++))
+	do
+		value=$(compare -metric AE pdkt_kusuma_$i pdkt_kusuma_$j null: 2>&1)
+		if [[ $value == 0 ]]
+		then
+			mv pdkt_kusuma_$j duplicate/duplicate_$duplicatecount
+			duplicatecount=$((duplicatecount+1))
+		fi
+	done
+done
+
+for ((i=1 ; $i<=28 ; i++))
+do
+	if [[ -f pdkt_kusuma_$i ]]
+	then
+		mv pdkt_kusuma_$i kenangan/kenangan_$kenangancount
+		kenangancount=$((kenangancount+1))
+	fi
+done
+
+cp wget.log wget.log.bak
+~~~
+Penjelasan:
+- `ls -l kenangan | wc -l` untuk menghitung jumlah banyaknya newline saat melakukan list dengan option -l.
+- `compare -metric AE pdkt_kusuma_$i pdkt_kusuma_$j null: 2>&1` melakukan compare gambar dengan option metric absolute error. Command ini akan mengembalikan nilai banyaknya titik berbeda pada gambar. `2>&1` merupakan redirect pesan error agar tidak keluar ke terminal.
+- `mv pdkt_kusuma_$j duplicate/duplicate_$duplicatecount` memindahkan file ke folder duplicate.
+- `-f pdkt_kusuma_$i` melakukan pengecekan apakah file tersebut ada atau tidak.
+- `cp wget.log wget.log.bak` copy file wget.log menjadi wget.log.bak sebagai backup.
