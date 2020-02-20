@@ -192,7 +192,7 @@ Penjelasan:
 ### c. Maka dari itu buatlah sebuah script untuk mengidentifikasi gambar yang identik dari keseluruhan gambar yang terdownload tadi. Bila terindikasi sebagai gambar yang identik, maka sisakan 1 gambar dan pindahkan sisa file identik tersebut ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory , maka lakukan backup seluruh log menjadi ekstensi ".log.bak".
 
 #### Penyelesaian
-Menggunakan command wget untuk melakukan download gambar dari url yang diberikan.
+Pertama disiapkan counter untuk penomoran file dalam folder kenangan dan duplicate. Berikutnya gambar saling di cek untuk diketahui apakah ada perbedaan. Salah satu gambar yang sama dipindahkan ke folder duplicate dan setelah semua pengecekan selesai, gambar yang tersisa dipindahkan ke folder kenangan. Terakhir file .log dicopy menjadi .log.bak
 ~~~
 kenangancount=$(ls -l kenangan | wc -l)
 duplicatecount=$(ls -l duplicate | wc -l)
