@@ -1,9 +1,9 @@
 # SoalShiftSISOP20_modul1_F06
 ## Contents
 - [Soal 1](#Soal-1)
-	- [a](#a)
-	- [b](#b)
-	- [c](#c)
+	- [a](#a-tentukan-wilayah-bagian-region-mana-yang-memiliki-keuntungan-profit-paling-sedikit)
+	- [b](#b-tampilkan-2-negara-bagian-state-yang-memiliki-keuntungan-profit-paling-sedikit-berdasarkan-hasil-poin-a)
+	- [c](#c-tampilkan-10-produk-product-name-yang-memiliki-keuntungan-profit-paling-sedikit-berdasarkan-2-negara-bagian-state-hasil-poin-b)
 		
 ## Soal 1
 Whits adalah seorang mahasiswa teknik informatika. Dia mendapatkan tugas praktikum
