@@ -91,7 +91,7 @@ meminta bantuan kepada Whits karena dia adalah seorang yang punya banyak ide.
 Whits memikirkan sebuah ide namun dia meminta bantuan kalian kembali agar ide
 tersebut cepat diselesaikan.
 
-### a. Membuat sebuah script bash yang dapat menghasilkan password secara acak sebanyak 28 karakter yang terdapat huruf besar, huruf kecil, dan angka / b. Password acak tersebut disimpan pada file berekstensi .txt dengan nama berdasarkan argumen yang diinputkan dan HANYA berupa alphabet.
+### a. Membuat sebuah script bash yang dapat menghasilkan password secara acak sebanyak 28 karakter yang terdapat huruf besar, huruf kecil, dan angka. // b. Password acak tersebut disimpan pada file berekstensi .txt dengan nama berdasarkan argumen yang diinputkan dan HANYA berupa alphabet.
 
 #### Penyelesaian
 Menggunakan command untuk melakukan random generate character dan disimpan ke sebuah file dengan nama sesuai argumen yang diterima.
@@ -106,20 +106,50 @@ Penjelasan:
 - `head -n 1` membuat satu baris string random.
 - `> "$1".txt` melakukan redirection (menyimpan output ke file) dengan nama sesuai argumen.
 
-### b. 
+### c. Kemudian supaya file .txt tersebut tidak mudah diketahui maka nama filenya akan di enkripsi dengan menggunakan konversi huruf (string manipulation) yang disesuaikan dengan jam(0-23) dibuatnya file tersebut dengan program terpisah dengan (misal: password.txt dibuat pada jam 01.28 maka namanya berubah menjadi qbttxpse.txt dengan perintah ‘ bash soal2_enkripsi.sh password.txt’. Karena p adalah huruf ke 16 dan file dibuat pada jam 1 maka 16+1=17 dan huruf ke 17 adalah q dan begitu pula seterusnya. Apabila melebihi z , akan kembali ke a , contoh: huruf w dengan jam 5.28, maka akan menjadi huruf b.
 
 #### Penyelesaian
-Menggunakan command untuk melakukan random generate character dan disimpan ke sebuah file dengan nama sesuai argumen yang diterima.
+Memanipulasi nama file yang diakses sedemikian sehingga string asalnya berubah/bergeser beberapa alfabet tergantung dari jamnya. Pertama harus melakukan ekstrak nama file dan mendapatkan jam "last-modified" file tersebut yang digunakan untuk acuan enkripsi.
 ~~~
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > "$1".txt
+newfile=`basename -s .txt $1`
+hour=$(date +"%H" -r $1)
+
+while [ $hour -gt 0 ]
+do
+	newfile=$(echo "$newfile" | tr '[A-Za-z]' '[B-ZAb-za]')
+	hour=$((hour-1))
+done
+
+mv "$1" "$newfile.txt"
 ~~~
 Penjelasan:
-- `cat` digunakan untuk menampilkan isi file, dalam kasus ini isi file berasal dari command /dev/urandom.
-- `/dev/urandom` digunakan untuk memanggil perintah yang dapat me-random karakter secara pseudorandom.
-- `tr -dc 'a-zA-Z0-9'` mengatur agar karakter yang di-random merupakan alfabet dan angka.
-- `fold -w 28` jumlah karakter yang di-random sepanjang 28 karakter.
-- `head -n 1` membuat satu baris string random.
-- `> "$1".txt` melakukan redirection (menyimpan output ke file) dengan nama sesuai argumen.
+- `basename -s .txt $1` digunakan untuk mendapatkan nama file tanpa ekstensi .txt (-s .txt untuk mengabaikan ekstensi .txt) dari nama file yang diargumenkan/dijalankan script.
+- `hour=$(date +"%H" -r $1)` menampilkan waktu dengan format jam saja dari file dengan nama sesuai yang diargumenkan dan disimpan ke variable hour.
+- `newfile=$(echo "$newfile" | tr '[A-Za-z]' '[B-ZAb-za]')` melakukan enkripsi(penggeseran) alfabet sebanyak 1 ke kanan. Contohnya abc menjadi bcd. Proses ini diulang sebanyak variable hour. Hasil enkripsi disimpan ke variable newfile.
+- `mv "$1" "$newfile.txt"` me-rename file dengan nama yang telah dienkripsi.
+
+### d. jangan lupa untuk membuat dekripsinya supaya nama file bisa kembali.
+
+#### Penyelesaian
+Prinsip yang digunakan sama seperti saat melakukan enkripsi. Yang membedakan adalah kali ini string bergeser lawan arah dari saat enkripsi.
+~~~
+#!/bin/bash
+
+newfile=`basename -s .txt $1`
+hour=$(date +"%H" -r $1)
+
+while [ $hour -gt 0 ]
+do
+        newfile=$(echo "$newfile" | tr '[A-Za-z]' '[ZA-Yza-y]')
+        hour=$((hour-1))
+done
+
+mv "$1" "$newfile.txt"
+~~~
+Penjelasan:
+- `newfile=$(echo "$newfile" | tr '[A-Za-z]' '[ZA-Yza-y]')` melakukan enkripsi(penggeseran) alfabet sebanyak 1 ke kiri. Contohnya abc menjadi zab. Proses ini diulang sebanyak variable hour. Hasil dekripsi disimpan ke variable newfile.
+- command selebihnya berfungsi sama seperti pada soal c.
+
 
 
 ## Soal 3
