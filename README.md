@@ -89,7 +89,7 @@ Penjelasan:
 	- `head -10` menampilkan 10 row teratas
 
 #### Hasil
-![output_soal1](https://github.com/neutralix/SoalShiftSISOP20_modul1_F06/blob/master/output_soal1.png)
+![output_soal1](https://github.com/neutralix/SoalShiftSISOP20_modul1_F06/blob/master/Soal1/output_soal1.png)
 
 ## Soal 2
 Pada suatu siang, laptop Randolf dan Afairuzr dibajak oleh seseorang dan kehilangan data-data penting.
