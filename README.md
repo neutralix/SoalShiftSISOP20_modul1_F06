@@ -103,15 +103,18 @@ tersebut cepat diselesaikan.
 #### Penyelesaian
 Menggunakan command untuk melakukan random generate character dan disimpan ke sebuah file dengan nama sesuai argumen yang diterima.
 ~~~
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > "$1".txt
+name=$(echo $1 | tr -dc 'a-zA-Z')
+
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > "$name".txt
 ~~~
 Penjelasan:
+- `echo $1 | tr -dc 'a-zA-Z'` mentranslate string dari argumen yang diberikan agar hanya terdiri dari alfabet.
 - `cat` digunakan untuk menampilkan isi file, dalam kasus ini isi file berasal dari command /dev/urandom.
 - `/dev/urandom` digunakan untuk memanggil perintah yang dapat me-random karakter secara pseudorandom.
 - `tr -dc 'a-zA-Z0-9'` mengatur agar karakter yang di-random merupakan alfabet dan angka.
 - `fold -w 28` jumlah karakter yang di-random sepanjang 28 karakter.
 - `head -n 1` membuat satu baris string random.
-- `> "$1".txt` melakukan redirection (menyimpan output ke file) dengan nama sesuai argumen.
+- `> "$name".txt` melakukan redirection (menyimpan output ke file) dengan nama sesuai isi variable name.
 
 ### c. Kemudian supaya file .txt tersebut tidak mudah diketahui maka nama filenya akan di enkripsi dengan menggunakan konversi huruf (string manipulation) yang disesuaikan dengan jam(0-23) dibuatnya file tersebut.
 
